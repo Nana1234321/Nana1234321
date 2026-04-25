@@ -1,16 +1,23 @@
-## Hi there 👋
+# Привет, я Nana
 
-<!--
-**Nana1234321/Nana1234321** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Изучаю машинное обучение, люблю разбираться в том, как всё работает изнутри.
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+##  Проекты
+
+###  [Car Segmentation](https://github.com/Nana1234321/car-segmentation)
+> Бинарная сегментация автомобилей · **Val IoU: 0.89**
+
+Начала с U-Net с нуля, затем заменила энкодер на предобученный ResNet34 — сходимость ускорилась, границы маски стали чище. Самое интересное случилось во время экспериментов с инференсом: одно и то же изображение в разных цветовых пространствах (RGB, LAB, HSV, YCrCb, HLS) давало маски, которые ошибались в *разных* местах. Усреднение пяти масок сглаживало неуверенность на краях — и это наблюдение перекочевало в обучение как **Consistency Loss**: штраф за расхождение предсказаний между цветовыми пространствами.
+
+`PyTorch` `U-Net` `ResNet34` `OpenCV` `Docker` `Gradio`
+
+---
+
+###  [Quiz Question Classifier — Клевер/VK](https://github.com/Nana1234321/klever-question-classifier)
+> Реальная задача от VK Education · Бинарная классификация ~40k вопросов · **ROC-AUC: 0.75**
+
+Задача: по тексту вопроса определить, написан ли он редактором (10%) или пользователем (90%) в мобильной викторине VK. Сравнила BiLSTM + Navec-эмбеддинги против TF-IDF + LightGBM — на коротких текстах классика выиграла. Главная инженерная проблема — дисбаланс классов: наивная модель набирает 90% accuracy, просто всегда предсказывая большинство. Решение: взвешенный лосс, оценка по ROC-AUC и F1, подбор оптимального порога классификации (0.18 вместо стандартных 0.5).
+
+`PyTorch` `LightGBM` `scikit-learn` `Navec` `pandas`
